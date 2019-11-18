@@ -6,7 +6,7 @@ def siteUrl = 'https://github.com/dakun666/XRecyclerView'
 def gitUrl = 'https://github.com/dakun666/XRecyclerView.git'
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-version = "1.6.0"
+version = "1.6.1"
 group = "cn.nightcoder"
 
 android {
@@ -16,8 +16,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.6.0"
+        versionCode 2
+        versionName "1.6.1"
     }
     buildTypes {
         release {
@@ -46,10 +46,10 @@ bintray {
         userOrg = 'nightcoder'
         publish = true
         version {
-            name = '1.6.0'
+            name = '1.6.1'
             desc = 'A RecyclerView that implements pullrefresh and loadingmore featrues.you can use it like a standard RecyclerView'
             released = new Date()
-            vcsTag = 'v1.6.0'
+            vcsTag = 'v1.6.1'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
