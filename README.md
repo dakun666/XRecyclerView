@@ -11,7 +11,7 @@ Usage
 ## gradle
 ```groovy
 // 1.6.0 is the main
-compile 'cn.nightcoder:xrecyclerview:1.6.0'
+compile 'cn.nightcoder:xrecyclerview:1.6.1'
 ```
 just like a standard RecyclerView
 ```java
