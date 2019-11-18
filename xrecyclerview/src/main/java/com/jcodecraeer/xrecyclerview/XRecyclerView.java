@@ -33,7 +33,7 @@ public class XRecyclerView extends RecyclerView {
     private ArrayList<View> mHeaderViews = new ArrayList<>();
     private WrapAdapter mWrapAdapter;
     private float mLastY = -1;
-    private float dragRate = 3;
+    private float dragRate = 1.6f;
     private CustomFooterViewCallBack footerViewCallBack;
     private LoadingListener mLoadingListener;
     private ArrowRefreshHeader mRefreshHeader;
