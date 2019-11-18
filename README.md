@@ -11,7 +11,7 @@ Usage
 ## gradle
 ```groovy
 // 1.6.0 is the main
-compile 'com.jcodecraeer:xrecyclerview:1.6.0'
+compile 'cn.nightcoder:xrecyclerview:1.6.0'
 ```
 just like a standard RecyclerView
 ```java
@@ -238,7 +238,7 @@ mRecyclerView.addHeaderView(header1);
 License
 -------
 
-    Copyright 2015 jianghejie
+    Copyright 2019 dakun
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
