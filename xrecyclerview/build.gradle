@@ -1,23 +1,23 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
-// gradle bintrayUpload
-version = "1.5.8"
-group = "com.jcodecraeer"
-
-def siteUrl = 'https://github.com/jianghejie/XRecyclerView'
-def gitUrl = 'https://github.com/jianghejie/XRecyclerView.git'
+def siteUrl = 'https://github.com/dakun666/XRecyclerView'
+def gitUrl = 'https://github.com/dakun666/XRecyclerView.git'
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+version = "1.6.0"
+group = "cn.nightcoder"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 24
+        minSdkVersion 14
+        targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.6.0"
     }
     buildTypes {
         release {
@@ -28,33 +28,52 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 }
 
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    pkg {
+        repo = 'Android-Library'
+        name = 'XRecyclerView'
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        userOrg = 'nightcoder'
+        publish = true
+        version {
+            name = '1.6.0'
+            desc = 'A RecyclerView that implements pullrefresh and loadingmore featrues.you can use it like a standard RecyclerView'
+            released = new Date()
+            vcsTag = 'v1.6.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+    configurations = ['archives']
+}
 install {
     repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
         pom {
             project {
                 packaging 'aar'
-                // Add your description here
-                name 'a RecyclerView that implements pullrefresh and loadingmore featrues.you can use it like a standard RecyclerView'     //项目的描述 你可以多写一点
+                name 'XRecyclerView'
+                description 'A RecyclerView that implements pullrefresh and loadingmore featrues.you can use it like a standard RecyclerView'
                 url siteUrl
-                // Set your license
                 licenses {
                     license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name 'Apache-2.0'
+                        url 'https://github.com/dakun666/SliderIndicator/blob/master/LICENSE'
                     }
                 }
                 developers {
                     developer {
-                        id 'jianghejie'        //填写的一些基本信息
-                        name 'jianghejie'
-                        email 'jianghejie888@gmail.com'
+                        id 'dakun'
+                        name 'dakun'         //姓名
+                        email 'dakun611@gmail.com'//邮箱
                     }
                 }
                 scm {
@@ -66,27 +85,30 @@ install {
         }
     }
 }
-
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
-
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
 artifacts {
+    archives javadocJar
     archives sourcesJar
 }
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("BINTRAY_USER")
-    key = properties.getProperty("BINTRAY_KEY")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "xrecyclerview"    //发布到JCenter上的项目名字
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
+javadoc {
+    options {
+        //如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
     }
 }

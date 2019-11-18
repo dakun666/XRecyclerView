@@ -2,10 +2,11 @@ package com.example.xrecyclerview;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.StickyScrollLinearLayout;
@@ -39,8 +40,7 @@ public class LinearStickyScrollActivity extends AppCompatActivity {
         final View topView = findViewById(R.id.topView);
         final View tabView = findViewById(R.id.tabView);
         final View content = findViewById(R.id.contentView);
-        final StickyScrollLinearLayout s =
-                (StickyScrollLinearLayout) findViewById(R.id.StickyScrollLinearLayout);
+        final StickyScrollLinearLayout s = findViewById(R.id.StickyScrollLinearLayout);
         s.addOnLayoutChangeListener(
                 new View.OnLayoutChangeListener() {
                     @Override
@@ -73,7 +73,7 @@ public class LinearStickyScrollActivity extends AppCompatActivity {
     }
 
     private void initXR(){
-        mRecyclerView = (XRecyclerView) findViewById(R.id.XRecyclerView);
+        mRecyclerView = findViewById(R.id.XRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -117,7 +117,7 @@ public class LinearStickyScrollActivity extends AppCompatActivity {
             }
         });
 
-        listData = new  ArrayList<String>();
+        listData = new ArrayList();
         for(int i=0;i<20;i++){
             listData.add(" data -- "+i);
         }
